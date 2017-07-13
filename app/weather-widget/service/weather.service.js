@@ -9,21 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
-const weather_service_1 = require('../service/weather.service');
-let WeatherComponent = class WeatherComponent {
-    constructor(service) {
-        this.service = service;
-    }
+let WeatherService = class WeatherService {
 };
-WeatherComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'weather-widget',
-        templateUrl: 'weather.component.html',
-        styleUrls: ['weather.component.css'],
-        providers: [weather_service_1.WeatherService]
-    }), 
-    __metadata('design:paramtypes', [weather_service_1.WeatherService])
-], WeatherComponent);
-exports.WeatherComponent = WeatherComponent;
-//# sourceMappingURL=weather.component.js.map
+WeatherService = __decorate([
+    core_1.Injectable(), 
+    __metadata('design:paramtypes', [])
+], WeatherService);
+exports.WeatherService = WeatherService;
+//# sourceMappingURL=weather.service.js.map
