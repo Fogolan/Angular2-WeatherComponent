@@ -9,23 +9,44 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
+const http_1 = require('@angular/http');
+const Observable_1 = require('rxjs/Observable');
+require('rxjs/add/operator/map');
+require('rxjs/add/operator/catch');
+const constants_1 = require('../constants/constants');
 let WeatherService = class WeatherService {
+    constructor(jsonp) {
+        this.jsonp = jsonp;
+    }
     getCurrentLocation() {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(pos => {
-                console.log("Position: ", pos.coords.latitude, ",", pos.coords.longitude);
-                return [pos.coords.latitude, pos.coords.longitude];
-            }, err => { console.error("Unable to get the position - ", err); });
+            return Observable_1.Observable.create(observer => {
+                navigator.geolocation.getCurrentPosition(pos => {
+                    observer.next(pos);
+                }),
+                    err => {
+                        return Observable_1.Observable.throw(err);
+                    };
+            });
         }
         else {
-            console.error("Geolocation is not available");
-            return [0, 0];
+            return Observable_1.Observable.throw("Geolocation is not available");
         }
+    }
+    getCurrentWeather(lat, long) {
+        const url = constants_1.FORECAST_ROOT + constants_1.FORECAST_KEY + "/" + lat + "," + long;
+        const queryParams = "?callback=JSONP_CALLBACK";
+        return this.jsonp.get(url + queryParams)
+            .map(data => data.json())
+            .catch(err => {
+            console.error("Unable to get weather data - ", err);
+            return Observable_1.Observable.throw(err.json());
+        });
     }
 };
 WeatherService = __decorate([
     core_1.Injectable(), 
-    __metadata('design:paramtypes', [])
+    __metadata('design:paramtypes', [http_1.Jsonp])
 ], WeatherService);
 exports.WeatherService = WeatherService;
 //# sourceMappingURL=weather.service.js.map

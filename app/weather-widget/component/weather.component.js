@@ -13,7 +13,12 @@ const weather_service_1 = require('../service/weather.service');
 let WeatherComponent = class WeatherComponent {
     constructor(service) {
         this.service = service;
-        this.service.getCurrentLocation();
+        this.service.getCurrentLocation()
+            .subscribe(position => {
+            this.pos = position;
+            this.service.getCurrentWeather(this.pos.coords.latitude, this.pos.coords.longitude)
+                .subscribe(weather => console.log(weather), err => console.error(err));
+        }, err => console.error(err));
     }
 };
 WeatherComponent = __decorate([
