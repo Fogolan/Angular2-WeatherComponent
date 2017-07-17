@@ -15,6 +15,7 @@ let WeatherComponent = class WeatherComponent {
     constructor(service) {
         this.service = service;
         this.weatherData = new weather_1.Weather(null, null, null, null, null);
+        this.currentSpeedUnit = "kph";
     }
     ngOnInit() {
         this.getCurrentLocation();
