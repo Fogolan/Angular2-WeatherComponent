@@ -15,11 +15,26 @@ let WeatherComponent = class WeatherComponent {
     constructor(service) {
         this.service = service;
         this.weatherData = new weather_1.Weather(null, null, null, null, null);
+    }
+    ngOnInit() {
+        this.getCurrentLocation();
+    }
+    getCurrentLocation() {
         this.service.getCurrentLocation()
             .subscribe(position => {
             this.pos = position;
-            this.service.getCurrentWeather(this.pos.coords.latitude, this.pos.coords.longitude)
-                .subscribe(weather => console.log(weather), err => console.error(err));
+            this.getCurrentWeather();
+        }, err => console.error(err));
+    }
+    getCurrentWeather() {
+        this.service.getCurrentWeather(this.pos.coords.latitude, this.pos.coords.longitude)
+            .subscribe(weather => {
+            this.weatherData.temp = weather["currently"]["temperature"],
+                this.weatherData.summary = weather["currently"]["summary"],
+                this.weatherData.wind = weather["currently"]["windSpeed"],
+                this.weatherData.humidity = weather["currently"]["humidity"],
+                this.weatherData.icon = weather["currently"]["icon"];
+            console.log(this.weatherData);
         }, err => console.error(err));
     }
 };
