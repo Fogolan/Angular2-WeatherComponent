@@ -10,6 +10,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = require('@angular/core');
 let WeatherService = class WeatherService {
+    getCurrentLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(pos => {
+                console.log("Position: ", pos.coords.latitude, ",", pos.coords.longitude);
+                return [pos.coords.latitude, pos.coords.longitude];
+            }, err => { console.error("Unable to get the position - ", err); });
+        }
+        else {
+            console.error("Geolocation is not available");
+            return [0, 0];
+        }
+    }
 };
 WeatherService = __decorate([
     core_1.Injectable(), 
