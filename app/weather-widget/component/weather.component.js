@@ -18,6 +18,7 @@ let WeatherComponent = class WeatherComponent {
         this.currentSpeedUnit = "kph";
         this.currentTempUnit = "fahrenheit";
         this.currentLocation = "";
+        this.icons = new Skycons({ "color": "#FFF" });
     }
     ngOnInit() {
         this.getCurrentLocation();
@@ -39,6 +40,7 @@ let WeatherComponent = class WeatherComponent {
                 this.weatherData.humidity = weather["currently"]["humidity"],
                 this.weatherData.icon = weather["currently"]["icon"];
             console.log(this.weatherData);
+            this.setIcon();
         }, err => console.error(err));
     }
     getLocationName() {
@@ -68,6 +70,10 @@ let WeatherComponent = class WeatherComponent {
         else {
             this.currentSpeedUnit = "kph";
         }
+    }
+    setIcon() {
+        this.icons.add("icon", this.weatherData.icon);
+        this.icons.play();
     }
 };
 WeatherComponent = __decorate([
