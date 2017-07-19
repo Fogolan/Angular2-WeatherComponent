@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = require('@angular/core');
 const weather_service_1 = require('../service/weather.service');
 const weather_1 = require('../model/weather');
+const constants_1 = require('../constants/constants');
 let WeatherComponent = class WeatherComponent {
     constructor(service) {
         this.service = service;
@@ -18,7 +19,7 @@ let WeatherComponent = class WeatherComponent {
         this.currentSpeedUnit = "kph";
         this.currentTempUnit = "fahrenheit";
         this.currentLocation = "";
-        this.icons = new Skycons({ "color": "#FFF" });
+        this.icons = new Skycons();
     }
     ngOnInit() {
         this.getCurrentLocation();
@@ -74,6 +75,16 @@ let WeatherComponent = class WeatherComponent {
     setIcon() {
         this.icons.add("icon", this.weatherData.icon);
         this.icons.play();
+    }
+    setStyles() {
+        if (this.weatherData.icon) {
+            this.icons.color = constants_1.WEATHER_COLORS[this.weatherData.icon]["color"];
+            return constants_1.WEATHER_COLORS[this.weatherData.icon];
+        }
+        else {
+            this.icons.color = constants_1.WEATHER_COLORS["default"]["color"];
+            return constants_1.WEATHER_COLORS["default"];
+        }
     }
 };
 WeatherComponent = __decorate([
