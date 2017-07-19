@@ -17,6 +17,7 @@ let WeatherComponent = class WeatherComponent {
         this.weatherData = new weather_1.Weather(null, null, null, null, null);
         this.currentSpeedUnit = "kph";
         this.currentTempUnit = "fahrenheit";
+        this.currentLocation = "";
     }
     ngOnInit() {
         this.getCurrentLocation();
@@ -26,6 +27,7 @@ let WeatherComponent = class WeatherComponent {
             .subscribe(position => {
             this.pos = position;
             this.getCurrentWeather();
+            this.getLocationName();
         }, err => console.error(err));
     }
     getCurrentWeather() {
@@ -38,6 +40,14 @@ let WeatherComponent = class WeatherComponent {
                 this.weatherData.icon = weather["currently"]["icon"];
             console.log(this.weatherData);
         }, err => console.error(err));
+    }
+    getLocationName() {
+        this.service.getLocationName(this.pos.coords.latitude, this.pos.coords.longitude)
+            .subscribe(location => {
+            console.log(location); //TODO: REMOVE
+            this.currentLocation = location["results"][3]["formatted_address"];
+            console.log("Name: ", this.currentLocation); //TODO: REMOVE
+        });
     }
 };
 WeatherComponent = __decorate([
