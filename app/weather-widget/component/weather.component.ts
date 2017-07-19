@@ -15,6 +15,7 @@ export class WeatherComponent implements OnInit {
     pos: Position;
     weatherData = new Weather(null, null, null, null, null);
     currentSpeedUnit = "kph";
+    currentTempUnit = "fahrenheit";
 
     constructor(private service: WeatherService) { }
 
