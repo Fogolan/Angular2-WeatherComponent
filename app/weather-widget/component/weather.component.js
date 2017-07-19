@@ -49,6 +49,26 @@ let WeatherComponent = class WeatherComponent {
             console.log("Name: ", this.currentLocation); //TODO: REMOVE
         });
     }
+    toggleUnits() {
+        this.toggleTempUnits();
+        this.toggleSpeedUnits();
+    }
+    toggleTempUnits() {
+        if (this.currentTempUnit == "fahrenheit") {
+            this.currentTempUnit = "celsius";
+        }
+        else {
+            this.currentTempUnit = "fahrenheit";
+        }
+    }
+    toggleSpeedUnits() {
+        if (this.currentSpeedUnit == "kph") {
+            this.currentSpeedUnit = "mph";
+        }
+        else {
+            this.currentSpeedUnit = "kph";
+        }
+    }
 };
 WeatherComponent = __decorate([
     core_1.Component({
