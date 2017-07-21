@@ -1,7 +1,7 @@
 <div class="card" (click)="toggleUnits()" [ngStyle]="setStyles()">
     <div class="card-header" [class.invisible]="!dataReceived">
-        <div class="col-xs-8">
-            <p>{{ currentLocation }}</p>
+        <div class="col-xs-8" id="location-wrapper">
+            <p><i id="location-icon" class="fa fa-map-marker" aria-hidden="true"></i>{{ currentLocation }}</p>
         </div>
         <div class="col-xs-4 text-xs-right">
             <h1>{{ weatherData.temp | tempUnit: currentTempUnit | number: '.0-0' }}&deg;</h1>
@@ -16,13 +16,18 @@
         <p>{{ weatherData.summary }}</p>
     </div>
     <div class="card-footer" [class.invisible]="!dataReceived">
-        <div class="col-xs-5">
-            <p>Wind</p>
-            <p>{{ weatherData.wind | speedUnit: currentSpeedUnit }}</p>
+        <div class="row" id="detail-row">
+            <div class="col-xs-5">
+                <p>Wind</p>
+                <p id="unit-label">{{ weatherData.wind | speedUnit: currentSpeedUnit }}</p>
+            </div>
+            <div class="col-xs-4 offset-xs-2">
+                <p>Humidity</p>
+                <p>{{ weatherData.humidity | percent }}</p>
+            </div>
         </div>
-        <div class="col-xs-4 offset-xs-2">
-            <p>Humidity</p>
-            <p>{{ weatherData.humidity | percent }}</p>
+        <div class="row" id="helper-row">
+            <small class="text-muted">click to switch between &deg;f/kph and &deg;c/mph</small>
         </div>
     </div>
 </div>
