@@ -20,6 +20,7 @@ let WeatherComponent = class WeatherComponent {
         this.currentTempUnit = "fahrenheit";
         this.currentLocation = "";
         this.icons = new Skycons();
+        this.dataReceived = false;
     }
     ngOnInit() {
         this.getCurrentLocation();
@@ -42,6 +43,7 @@ let WeatherComponent = class WeatherComponent {
                 this.weatherData.icon = weather["currently"]["icon"];
             console.log(this.weatherData);
             this.setIcon();
+            this.dataReceived = true;
         }, err => console.error(err));
     }
     getLocationName() {
