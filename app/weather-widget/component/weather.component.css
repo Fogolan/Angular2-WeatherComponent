@@ -35,6 +35,9 @@
     width: 50%;
     margin: -8% 0 0 -25%;
 }
+#refresh-icon {
+    font-size: 2rem;
+}
 canvas {
     max-width: 250px;
 }

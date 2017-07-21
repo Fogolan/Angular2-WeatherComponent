@@ -88,6 +88,10 @@ let WeatherComponent = class WeatherComponent {
             return constants_1.WEATHER_COLORS["default"];
         }
     }
+    refreshCurrentWeater() {
+        this.dataReceived = false;
+        this.getCurrentLocation();
+    }
 };
 WeatherComponent = __decorate([
     core_1.Component({

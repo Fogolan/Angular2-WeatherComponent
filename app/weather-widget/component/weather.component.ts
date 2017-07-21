@@ -99,4 +99,8 @@ export class WeatherComponent implements OnInit {
             return WEATHER_COLORS["default"];
         }
     }
+    refreshCurrentWeater() {
+        this.dataReceived = false;
+        this.getCurrentLocation();
+    }
 }

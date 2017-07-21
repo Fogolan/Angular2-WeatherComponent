@@ -12,8 +12,16 @@
             <i class="fa fa-circle-o-notch fa-spin fa-4x fa-fw"></i>
             <span class="sr-only">Loading...</span>
         </div>
-        <canvas id="icon" [hidden]="!dataReceived"></canvas>
-        <p>{{ weatherData.summary }}</p>
+        <div [hidden]="!dataReceived">
+            <canvas id="icon"></canvas>
+            <p>{{ weatherData.summary }}</p>
+            <div class="row">
+                <i id="refresh-icon" class="fa fa-refresh" aria-hidden="true" (click)="refreshCurrentWeater()"></i>
+            </div>
+            <div class="row" id="helper-row">
+                <small class="text-muted">click here to refresh</small>
+            </div>
+        </div>
     </div>
     <div class="card-footer" [class.invisible]="!dataReceived">
         <div class="row" id="detail-row">
