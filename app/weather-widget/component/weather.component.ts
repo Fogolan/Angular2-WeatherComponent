@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 import { WeatherService } from '../service/weather.service';
 
@@ -23,6 +25,7 @@ export class WeatherComponent implements OnInit {
     currentLocation = "";
     icons = new Skycons();
     dataReceived = false;
+    lastRefreshDate: Date;
 
     constructor(private service: WeatherService) { }
 
@@ -51,6 +54,7 @@ export class WeatherComponent implements OnInit {
                 console.log(this.weatherData);
                 this.setIcon();
                 this.dataReceived = true;
+                this.getLastResfreshDate();
             },
             err => console.error(err));
     }
@@ -99,8 +103,11 @@ export class WeatherComponent implements OnInit {
             return WEATHER_COLORS["default"];
         }
     }
-    refreshCurrentWeater() {
+    refreshCurrentWeather() {
         this.dataReceived = false;
         this.getCurrentLocation();
+    }
+    getLastResfreshDate() {
+        this.lastRefreshDate = new Date();
     }
 }

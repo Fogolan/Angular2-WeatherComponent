@@ -2,6 +2,9 @@
     <div class="card-header" [class.invisible]="!dataReceived">
         <div class="col-xs-8" id="location-wrapper">
             <p><i id="location-icon" class="fa fa-map-marker" aria-hidden="true"></i>{{ currentLocation }}</p>
+            <div class="row" id="helper-row">
+                <small class="text-muted">{{ lastRefreshDate | date:"dd.MM.HH.mm" }}</small>
+            </div>
         </div>
         <div class="col-xs-4 text-xs-right">
             <h1>{{ weatherData.temp | tempUnit: currentTempUnit | number: '.0-0' }}&deg;</h1>
@@ -16,7 +19,7 @@
             <canvas id="icon"></canvas>
             <p>{{ weatherData.summary }}</p>
             <div class="row">
-                <i id="refresh-icon" class="fa fa-refresh" aria-hidden="true" (click)="refreshCurrentWeater()"></i>
+                <i id="refresh-icon" class="fa fa-refresh" aria-hidden="true" (click)="refreshCurrentWeather()"></i>
             </div>
             <div class="row" id="helper-row">
                 <small class="text-muted">click here to refresh</small>

@@ -44,6 +44,7 @@ let WeatherComponent = class WeatherComponent {
             console.log(this.weatherData);
             this.setIcon();
             this.dataReceived = true;
+            this.getLastResfreshDate();
         }, err => console.error(err));
     }
     getLocationName() {
@@ -88,9 +89,12 @@ let WeatherComponent = class WeatherComponent {
             return constants_1.WEATHER_COLORS["default"];
         }
     }
-    refreshCurrentWeater() {
+    refreshCurrentWeather() {
         this.dataReceived = false;
         this.getCurrentLocation();
+    }
+    getLastResfreshDate() {
+        this.lastRefreshDate = new Date();
     }
 };
 WeatherComponent = __decorate([

@@ -52,6 +52,9 @@ canvas {
 #helper-row {
     padding-top: .5rem;
 }
+.text-muted {
+    color: #474747!important;
+}
 .p {
     margin: .2rem;
 }
